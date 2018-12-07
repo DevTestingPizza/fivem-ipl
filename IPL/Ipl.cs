@@ -628,9 +628,13 @@ namespace IPL
                 {
                     ["default"] = new List<string>()
                     {
+                        "grdlc_int_01_shell",
+                        "gr_grdlc_int_01",
+                        "gr_grdlc_int_02",
                         "gr_entrance_placement",
+                        "gr_grdlc_interior_placement",
                         "gr_grdlc_interior_placement_interior_0_grdlc_int_01_milo_",
-                        "gr_grdlc_interior_placement_interior_1_grdlc_int_02_milo_"
+                        "gr_grdlc_interior_placement_interior_1_grdlc_int_02_milo_",
                     }
                 }
             });
@@ -654,7 +658,6 @@ namespace IPL
                     ["default"] = new List<string>() { "hei_sm_16_interior_v_bahama_milo_" }
                 }
             });
-
             ipls.Add(new IPL()
             {
                 interiorVariants = new Dictionary<string, List<string>>()
@@ -891,12 +894,12 @@ namespace IPL
             //EnableInteriorProp(interiorID, "set_office_modern");
             //EnableInteriorProp(interiorID, "set_bedroom_blinds_open");
             //EnableInteriorProp(interiorID, "set_lighting_wall_tint01");
-            //    //CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xC1F1920BAF281317, interiorID, "set_tint_shell", 4);
-            //    //CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xC1F1920BAF281317, interiorID, "set_bedroom_tint", 4);
-            //    //CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xC1F1920BAF281317, interiorID, "set_crane_tint", 4);
-            //    //CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xC1F1920BAF281317, interiorID, "set_modarea", 4);
-            //    //CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xC1F1920BAF281317, interiorID, "set_lighting_tint_props", 4);
-            //    //CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xC1F1920BAF281317, interiorID, "set_floor_decal_1", 4);
+            // SetInteriorPropColor(interiorID, "set_tint_shell", 4);
+            // SetInteriorPropColor(interiorID, "set_bedroom_tint", 4);
+            // SetInteriorPropColor(interiorID, "set_crane_tint", 4);
+            // SetInteriorPropColor(interiorID, "set_modarea", 4);
+            // SetInteriorPropColor(interiorID, "set_lighting_tint_props", 4);
+            // SetInteriorPropColor(interiorID, "set_floor_decal_1", 4);
 
             //    RefreshInterior(interiorID);
             //}
@@ -919,17 +922,21 @@ namespace IPL
                 {
                     var interior = GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z);
 
+                    Debug.WriteLine("interior for ipl: " + ipl.name);
                     if (IsValidInterior(interior))
                     {
+                        //Debug.WriteLine("valid interior for ipl: " + ipl.name);
                         foreach (KeyValuePair<string, int> iprop in ipl.interiorProps)
                         {
                             if (!IsInteriorPropEnabled(interior, iprop.Key))
                             {
+                                Debug.WriteLine($"enabling interior prop {iprop.Key} for ipl {ipl.name}");
                                 EnableInteriorProp(interior, iprop.Key);
                             }
                             if (iprop.Value != -1)
                             {
-                                CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xC1F1920BAF281317, interior, iprop.Key, iprop.Value);
+                                Debug.WriteLine($"setting interior prop color {iprop.Value} for ipl {ipl.name} for prop {iprop.Key}");
+                                SetInteriorPropColor(interior, iprop.Key, iprop.Value);
                             }
                         }
                         RefreshInterior(interior);
@@ -937,12 +944,12 @@ namespace IPL
                 }
                 if (ipl.name != "Bunker Interior")
                 {
-                    var blip = AddBlipForCoord(ipl.location.X, ipl.location.Y, ipl.location.Z);
-                    SetBlipSprite(blip, (int)ipl.sprite);
-                    BeginTextCommandSetBlipName("STRING");
-                    AddTextComponentString(ipl.name);
-                    EndTextCommandSetBlipName(blip);
-                    SetBlipAsShortRange(blip, true);
+                    //var blip = AddBlipForCoord(ipl.location.X, ipl.location.Y, ipl.location.Z);
+                    //SetBlipSprite(blip, (int)ipl.sprite);
+                    //BeginTextCommandSetBlipName("STRING");
+                    //AddTextComponentString(ipl.name);
+                    //EndTextCommandSetBlipName(blip);
+                    //SetBlipAsShortRange(blip, true);
                     if (ipl.name == "Bunker")
                     {
                         CreateTeleport(ipl.location, new Vector3(892.6384f, -3245.8664f, -98.2645f));
@@ -952,6 +959,72 @@ namespace IPL
                         CreateTeleport(ipl.location, new Vector3(-1267.2f, -2970.02f, -48.49f));
 
                     }
+                    ////{"name": "Example Blip","coordinates": {"x": 472.94,"y": -3035.96,"z": 6.2},"spriteID": 1,"color": 1}
+                    //Debug.Write("{" + $"\"name\":\"{ipl.name}\",\"coordinates\":" + "{" + $"\"x\":{ipl.location.X}, \"y\":{ipl.location.Y},\"z\":{ipl.location.Z}" + "}, \"spriteID\":" + ((int)ipl.sprite).ToString() + ",\"color\":1},\n");
+                }
+                else
+                {
+                    /*
+                    standard_bunker_set
+                    upgrade_bunker_set
+
+                    standard_security_set
+                    security_upgrade
+                    Office_blocker_set
+                    Office_Upgrade_set
+                    gun_range_blocker_set
+                    gun_wall_blocker
+                    gun_range_lights
+                    gun_locker_upgrade
+                    Gun_schematic_set
+
+                    */
+
+
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "standard_bunker_set");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "upgrade_bunker_set");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "standard_security_set");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "security_upgrade");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Office_blocker_set");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Office_Upgrade_set");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_range_blocker_set");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_wall_blocker");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_range_lights");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_locker_upgrade");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Gun_schematic_set");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Bunker_Style_A");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Bunker_Style_B");
+                    DisableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Bunker_Style_C");
+
+
+                    // style
+                    EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Bunker_Style_A");
+
+                    // prop sets
+                    EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "upgrade_bunker_set");
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Office_blocker_set");
+                    EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Office_Upgrade_set");
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_range_blocker_set");
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "standard_security_set");
+                    EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "security_upgrade");
+                    //EnableInteriorProp(258561, "standard_bunker_set");
+
+                    // props
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_wall_blocker");
+                    EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_range_lights");
+                    EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_locker_upgrade");
+                    EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Gun_schematic_set");
+
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Office_Upgrade_set");
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "Gun_schematic_set");
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "security_upgrade");
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_range_lights");
+                    //EnableInteriorProp(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z), "gun_locker_upgrade");
+
+                    // refresh interior
+                    RefreshInterior(GetInteriorAtCoords(ipl.location.X, ipl.location.Y, ipl.location.Z));
+                    //SetRadarBigmapEnabled(true, true);
+
                 }
 
             }
@@ -971,6 +1044,11 @@ namespace IPL
 
         private async Task OnTick()
         {
+            if (GetInteriorFromEntity(Game.PlayerPed.Handle) != 0)
+            {
+                SetRadarAsInteriorThisFrame(GetInteriorFromEntity(Game.PlayerPed.Handle), Game.PlayerPed.Position.X, Game.PlayerPed.Position.Y, Game.PlayerPed.Position.Z, )
+            }
+
             foreach (KeyValuePair<Vector3, Vector3> tp in teleports)
             {
                 DrawMarker(1, tp.Key.X, tp.Key.Y, tp.Key.Z - 1f, 0f, 0f, 0f, 0f, 0f, 0f, 1.5f, 1.5f, 1f, 250, 220, 60, 100, false, false, 0, false, null, null, false);
@@ -1004,7 +1082,7 @@ namespace IPL
                                         }
                                         if (iprop.Value != -1)
                                         {
-                                            CitizenFX.Core.Native.Function.Call((CitizenFX.Core.Native.Hash)0xC1F1920BAF281317, interior, iprop.Key, iprop.Value);
+                                            SetInteriorPropColor(interior, iprop.Key, iprop.Value);
                                         }
                                     }
                                     RefreshInterior(interior);
