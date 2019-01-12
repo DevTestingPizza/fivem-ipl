@@ -284,7 +284,8 @@ namespace IPL
                 location = new Vector3(2.69689322f, -667.0166f, 16.1306286f),
                 interiorVariants = new Dictionary<string, List<string>>()
                 {
-                    ["default"] = new List<string>() { "FINBANK" },
+                    ["default"] = new List<string>() { "FINBANK", "v_tunnel_hole" },
+                    ["default_no_hole"] = new List<string>() { "FINBANK", "v_tunnel_hole_swap" },
                 }
             });
             ipls.Add(new IPL()
@@ -814,44 +815,44 @@ namespace IPL
             #region latest DLC IPLs (exact location per ipl is unknown)
             List<string> dlcIpls = new List<string>()
             {
-                //"xm_x17dlc_int_placement",
-                //"xm_x17dlc_int_placement_interior_0_x17dlc_int_base_ent_milo_",
-                //"xm_x17dlc_int_placement_interior_10_x17dlc_int_tun_straight_milo_",
-                //"xm_x17dlc_int_placement_interior_11_x17dlc_int_tun_slope_flat_milo_",
-                //"xm_x17dlc_int_placement_interior_12_x17dlc_int_tun_flat_slope_milo_",
-                //"xm_x17dlc_int_placement_interior_13_x17dlc_int_tun_30d_r_milo_",
-                //"xm_x17dlc_int_placement_interior_14_x17dlc_int_tun_30d_l_milo_",
-                //"xm_x17dlc_int_placement_interior_15_x17dlc_int_tun_straight_milo_",
-                //"xm_x17dlc_int_placement_interior_16_x17dlc_int_tun_straight_milo_",
-                //"xm_x17dlc_int_placement_interior_17_x17dlc_int_tun_slope_flat_milo_",
-                //"xm_x17dlc_int_placement_interior_18_x17dlc_int_tun_slope_flat_milo_",
-                //"xm_x17dlc_int_placement_interior_19_x17dlc_int_tun_flat_slope_milo_",
-                //"xm_x17dlc_int_placement_interior_1_x17dlc_int_base_loop_milo_",
-                //"xm_x17dlc_int_placement_interior_20_x17dlc_int_tun_flat_slope_milo_",
-                //"xm_x17dlc_int_placement_interior_21_x17dlc_int_tun_30d_r_milo_",
-                //"xm_x17dlc_int_placement_interior_22_x17dlc_int_tun_30d_r_milo_",
-                //"xm_x17dlc_int_placement_interior_23_x17dlc_int_tun_30d_r_milo_",
-                //"xm_x17dlc_int_placement_interior_24_x17dlc_int_tun_30d_r_milo_",
-                //"xm_x17dlc_int_placement_interior_25_x17dlc_int_tun_30d_l_milo_",
-                //"xm_x17dlc_int_placement_interior_26_x17dlc_int_tun_30d_l_milo_",
-                //"xm_x17dlc_int_placement_interior_27_x17dlc_int_tun_30d_l_milo_",
-                //"xm_x17dlc_int_placement_interior_28_x17dlc_int_tun_30d_l_milo_",
-                //"xm_x17dlc_int_placement_interior_29_x17dlc_int_tun_30d_l_milo_",
-                //"xm_x17dlc_int_placement_interior_2_x17dlc_int_bse_tun_milo_",
-                //"xm_x17dlc_int_placement_interior_30_v_apart_midspaz_milo_",
-                //"xm_x17dlc_int_placement_interior_31_v_studio_lo_milo_",
-                //"xm_x17dlc_int_placement_interior_32_v_garagem_milo_",
-                //"xm_x17dlc_int_placement_interior_33_x17dlc_int_02_milo_",
-                //"xm_x17dlc_int_placement_interior_34_x17dlc_int_lab_milo_",
-                //"xm_x17dlc_int_placement_interior_35_x17dlc_int_tun_entry_milo_",
-                //"xm_x17dlc_int_placement_interior_3_x17dlc_int_base_milo_",
-                //"xm_x17dlc_int_placement_interior_4_x17dlc_int_facility_milo_",
-                //"xm_x17dlc_int_placement_interior_5_x17dlc_int_facility2_milo_",
-                //"xm_x17dlc_int_placement_interior_6_x17dlc_int_silo_01_milo_",
-                //"xm_x17dlc_int_placement_interior_7_x17dlc_int_silo_02_milo_",
-                //"xm_x17dlc_int_placement_interior_8_x17dlc_int_sub_milo_",
-                //"xm_x17dlc_int_placement_interior_9_x17dlc_int_01_milo_",
-                //"xm_x17dlc_int_placement_strm_0",
+                "xm_x17dlc_int_placement",
+                "xm_x17dlc_int_placement_interior_0_x17dlc_int_base_ent_milo_",
+                "xm_x17dlc_int_placement_interior_10_x17dlc_int_tun_straight_milo_",
+                "xm_x17dlc_int_placement_interior_11_x17dlc_int_tun_slope_flat_milo_",
+                "xm_x17dlc_int_placement_interior_12_x17dlc_int_tun_flat_slope_milo_",
+                "xm_x17dlc_int_placement_interior_13_x17dlc_int_tun_30d_r_milo_",
+                "xm_x17dlc_int_placement_interior_14_x17dlc_int_tun_30d_l_milo_",
+                "xm_x17dlc_int_placement_interior_15_x17dlc_int_tun_straight_milo_",
+                "xm_x17dlc_int_placement_interior_16_x17dlc_int_tun_straight_milo_",
+                "xm_x17dlc_int_placement_interior_17_x17dlc_int_tun_slope_flat_milo_",
+                "xm_x17dlc_int_placement_interior_18_x17dlc_int_tun_slope_flat_milo_",
+                "xm_x17dlc_int_placement_interior_19_x17dlc_int_tun_flat_slope_milo_",
+                "xm_x17dlc_int_placement_interior_1_x17dlc_int_base_loop_milo_",
+                "xm_x17dlc_int_placement_interior_20_x17dlc_int_tun_flat_slope_milo_",
+                "xm_x17dlc_int_placement_interior_21_x17dlc_int_tun_30d_r_milo_",
+                "xm_x17dlc_int_placement_interior_22_x17dlc_int_tun_30d_r_milo_",
+                "xm_x17dlc_int_placement_interior_23_x17dlc_int_tun_30d_r_milo_",
+                "xm_x17dlc_int_placement_interior_24_x17dlc_int_tun_30d_r_milo_",
+                "xm_x17dlc_int_placement_interior_25_x17dlc_int_tun_30d_l_milo_",
+                "xm_x17dlc_int_placement_interior_26_x17dlc_int_tun_30d_l_milo_",
+                "xm_x17dlc_int_placement_interior_27_x17dlc_int_tun_30d_l_milo_",
+                "xm_x17dlc_int_placement_interior_28_x17dlc_int_tun_30d_l_milo_",
+                "xm_x17dlc_int_placement_interior_29_x17dlc_int_tun_30d_l_milo_",
+                "xm_x17dlc_int_placement_interior_2_x17dlc_int_bse_tun_milo_",
+                "xm_x17dlc_int_placement_interior_30_v_apart_midspaz_milo_",
+                "xm_x17dlc_int_placement_interior_31_v_studio_lo_milo_",
+                "xm_x17dlc_int_placement_interior_32_v_garagem_milo_",
+                "xm_x17dlc_int_placement_interior_33_x17dlc_int_02_milo_",
+                "xm_x17dlc_int_placement_interior_34_x17dlc_int_lab_milo_",
+                "xm_x17dlc_int_placement_interior_35_x17dlc_int_tun_entry_milo_",
+                "xm_x17dlc_int_placement_interior_3_x17dlc_int_base_milo_",
+                "xm_x17dlc_int_placement_interior_4_x17dlc_int_facility_milo_",
+                "xm_x17dlc_int_placement_interior_5_x17dlc_int_facility2_milo_",
+                "xm_x17dlc_int_placement_interior_6_x17dlc_int_silo_01_milo_",
+                "xm_x17dlc_int_placement_interior_7_x17dlc_int_silo_02_milo_",
+                "xm_x17dlc_int_placement_interior_8_x17dlc_int_sub_milo_",
+                "xm_x17dlc_int_placement_interior_9_x17dlc_int_01_milo_",
+                "xm_x17dlc_int_placement_strm_0",
                 "xm_bunkerentrance_door",
                 "xm_hatch_01_cutscene",
                 "xm_hatch_02_cutscene",
@@ -876,6 +877,11 @@ namespace IPL
                 {
                     RequestIpl(dlcipl);
                     //RemoveIpl(dlcipl);
+                }
+                else
+                {
+                    RemoveIpl(dlcipl);
+                    RequestIpl(dlcipl);
                 }
             }
 
@@ -914,6 +920,11 @@ namespace IPL
                     {
                         if (!IsIplActive(name))
                         {
+                            RequestIpl(name);
+                        }
+                        else
+                        {
+                            RemoveIpl(name);
                             RequestIpl(name);
                         }
                     }
@@ -1032,6 +1043,76 @@ namespace IPL
 
             Tick += OnTick;
 
+            Tick += DesObjectVaultTick;
+
+        }
+
+        private readonly Vector3 triggerLocation = new Vector3(9f, -650f, 16f);
+
+        private async Task DesObjectVaultTick()
+        {
+            var dist = Game.PlayerPed.Position.DistanceToSquared(triggerLocation);
+
+            if (dist < 2000f)
+            {
+                if (dist < 500f)
+                {
+                    var desObj1 = GetDesObject(7.25f, -656.98f, 17.14f, 50.0f, "des_finale_vault");
+                    var desObj2 = GetDesObject(7.25f, -656.98f, 17.14f, 50.0f, "des_finale_tunnel");
+
+                    if (DoesDesObjectExist(desObj1) && DoesDesObjectExist(desObj2))
+                    {
+                        var state1 = GetDesObjectState(desObj1);
+                        var state2 = GetDesObjectState(desObj2);
+
+                        if (state1 < 6 || state2 < 6)
+                        {
+                            SetDesObjectState(desObj1, 4);
+                            SetDesObjectState(desObj2, 4);
+                        }
+
+                        if (state1 < 6 && state2 < 6)
+                        {
+                            DrawMarker(1, triggerLocation.X, triggerLocation.Y, triggerLocation.Z - 1.2f, 0f, 0f, 0f, 0f, 0f, 0f, 1.5f, 1.5f, 1f, 255, 255, 60, 100, false, false, 0, false, null, null, false);
+                        }
+                        else
+                        {
+                            if (state1 >= 9 && state2 >= 9)
+                            {
+                                DrawMarker(1, triggerLocation.X, triggerLocation.Y, triggerLocation.Z - 1.2f, 0f, 0f, 0f, 0f, 0f, 0f, 1.5f, 1.5f, 1f, 255, 60, 60, 100, false, false, 0, false, null, null, false);
+                            }
+                        }
+
+
+                        if (dist < 1f)
+                        {
+                            if (state1 < 6 || state2 < 6)
+                            {
+                                CitizenFX.Core.UI.Screen.DisplayHelpTextThisFrame("Press ~INPUT_TALK~ to trigger this scene.");
+                                if (Game.IsControlJustReleased(0, Control.Talk))
+                                {
+                                    SetDesObjectState(desObj1, 6);
+                                    SetDesObjectState(desObj2, 6);
+                                }
+                            }
+                            else if (state1 >= 9 && state2 >= 9)
+                            {
+                                CitizenFX.Core.UI.Screen.DisplayHelpTextThisFrame("Press ~INPUT_TALK~ to reset this scene.");
+                                if (Game.IsControlJustReleased(0, Control.Talk))
+                                {
+                                    SetDesObjectState(desObj1, 4);
+                                    SetDesObjectState(desObj2, 4);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                await Delay(1000);
+            }
         }
 
         private Vector3 previousCoords;
@@ -1046,7 +1127,7 @@ namespace IPL
         {
             if (GetInteriorFromEntity(Game.PlayerPed.Handle) != 0)
             {
-                SetRadarAsInteriorThisFrame(GetInteriorFromEntity(Game.PlayerPed.Handle), Game.PlayerPed.Position.X, Game.PlayerPed.Position.Y, Game.PlayerPed.Position.Z, )
+                //SetRadarAsInteriorThisFrame(GetInteriorFromEntity(Game.PlayerPed.Handle), Game.PlayerPed.Position.X, Game.PlayerPed.Position.Y, Game.PlayerPed.Position.Z, )
             }
 
             foreach (KeyValuePair<Vector3, Vector3> tp in teleports)
